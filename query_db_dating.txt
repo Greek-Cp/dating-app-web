@@ -1,0 +1,2 @@
+CREATE TABLE `detail_akun`(`id_detail_akun` VARCHAR(100) PRIMARY KEY , `id_akun_disukai` VARCHAR(100), `id_akun_favorit` VARCHAR(100),FOREIGN KEY();
+CREATE TABLE `akun`(`id_akun` VARCHAR(100) PRIMARY KEY,`nama_akun` VARCHAR(100), `umur` INT(10) , `kode_otp` INT(4), `tanggal_lahir` DATE , `nomer_hp` INT(12) , `jenis_kelamin` VARCHAR(1),`your_interested` VARCHAR(100));
