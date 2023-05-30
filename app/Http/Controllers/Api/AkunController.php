@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class AkunController extends Controller
 {
-
     public function insertData(Request $request)
     {
         // Validasi data yang diterima dari request
@@ -20,14 +19,12 @@ class AkunController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         // Insert data ke tabel 'akun'
         $akun = Akun::create([
             'id_akun' => $request->id_akun,
             'email' => $request->email,
             'password' => $request->password,
         ]);
-
         // Insert data ke tabel 'profil'
         $profil = Profil::create([
             'id_akun' => $request->id_akun,
@@ -40,7 +37,6 @@ class AkunController extends Controller
             'your_interested' => $request->your_interested,
             'gambar_profile' => $request->gambar_profile,
         ]);
-
         // Insert data ke tabel 'pekerjaan'
         $pekerjaan = Pekerjaan::create([
             'id_akun' => $request->id_akun,
@@ -48,7 +44,6 @@ class AkunController extends Controller
             'deskripsi_singkat' => $request->deskripsi_singkat,
             'pekerjaan' => $request->pekerjaan,
         ]);
-
         // Berikan respon berhasil
         return response()->json(['message' => 'Data berhasil ditambahkan'], 201);
     }
@@ -59,28 +54,22 @@ class AkunController extends Controller
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
         // Cari data akun yang akan diupdate
         $akun = Akun::find($id_akun);
-
         // Jika data akun tidak ditemukan, berikan respon error
         if (!$akun) {
             return response()->json(['message' => 'Akun tidak ditemukan'], 404);
         }
-
         // Update data akun
         $akun->email = $request->email;
         $akun->password = $request->password;
         $akun->save();
-
         // Cari data profil yang sesuai dengan id_akun
         $profil = Profil::where('id_akun', $id_akun)->first();
-
         // Jika data profil tidak ditemukan, berikan respon error
         if (!$profil) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
         }
-
         // Update data profil
         $profil->nama_akun = $request->nama_akun;
         $profil->umur = $request->umur;
@@ -91,21 +80,17 @@ class AkunController extends Controller
         $profil->your_interested = $request->your_interested;
         $profil->gambar_profile = $request->gambar_profile;
         $profil->save();
-
         // Cari data pekerjaan yang sesuai dengan id_akun
         $pekerjaan = Pekerjaan::where('id_akun', $id_akun)->first();
-
         // Jika data pekerjaan tidak ditemukan, berikan respon error
         if (!$pekerjaan) {
             return response()->json(['message' => 'Pekerjaan tidak ditemukan'], 404);
         }
-
         // Update data pekerjaan
         $pekerjaan->lokasi = $request->lokasi;
         $pekerjaan->deskripsi_singkat = $request->deskripsi_singkat;
         $pekerjaan->pekerjaan = $request->pekerjaan;
         $pekerjaan->save();
-
         // Berikan respon berhasil
         return response()->json(['message' => 'Data berhasil diupdate'], 200);
     }
@@ -114,28 +99,22 @@ class AkunController extends Controller
     {
         // Cari data akun berdasarkan id_akun
         $akun = Akun::find($id_akun);
-
         // Jika data akun tidak ditemukan, berikan respon error
         if (!$akun) {
             return response()->json(['message' => 'Akun tidak ditemukan'], 404);
         }
-
         // Cari data profil yang sesuai dengan id_akun
         $profil = Profil::where('id_akun', $id_akun)->first();
-
         // Jika data profil tidak ditemukan, berikan respon error
         if (!$profil) {
             return response()->json(['message' => 'Profil tidak ditemukan'], 404);
         }
-
         // Cari data pekerjaan yang sesuai dengan id_akun
         $pekerjaan = Pekerjaan::where('id_akun', $id_akun)->first();
-
         // Jika data pekerjaan tidak ditemukan, berikan respon error
         if (!$pekerjaan) {
             return response()->json(['message' => 'Pekerjaan tidak ditemukan'], 404);
         }
-
         // Format data yang akan dikirimkan sebagai response
         $data = [
             'id_akun' => $akun->id_akun,
@@ -153,10 +132,8 @@ class AkunController extends Controller
             'deskripsi_singkat' => $pekerjaan->deskripsi_singkat,
             'pekerjaan' => $pekerjaan->pekerjaan,
         ];
-
         // Berikan respon dengan data yang ditemukan
         $status =['pesan' => 'Akun Ditemukan', 'data' => $data];
         return response()->json($status, 404);
-
     }
 }

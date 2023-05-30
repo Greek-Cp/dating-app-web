@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('/akun', [AkunController::class, 'insertData']);
 Route::put('/akun/{id_akun}', [AkunController::class, 'updateData']);
 Route::get('/akun/{id_akun}', [AkunController::class, 'getData']);
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
